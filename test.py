@@ -11,7 +11,7 @@ from tqdm import tqdm
 random.seed(datetime.datetime.now())
 
 
-def generate_data(lat,lon,speed):
+def generate_data(lat,lon,speed,engineTemperature):
 
   data = '{\
       "date": '+json.dumps(datetime.datetime.now().isoformat())+',\
@@ -23,7 +23,7 @@ def generate_data(lat,lon,speed):
       "rpm": 0.0,\
       "massAirFlow": 0.0,\
       "speed": '+str(speed)+',\
-      "engineTemperature": 0.0\
+      "engineTemperature": '+engineTemperature+'\
   }'
 
   return data
@@ -44,7 +44,7 @@ def simulate_traffic(address,start,stop,change_mean_each=50,means=[5,10,60,90,13
       speed_idx = 0
     (lat,lon) = getCoordinates(address+","+str(start+i))
     speed = speeds[speed_idx] if speeds[speed_idx] > 0 else 0
-    data = generate_data(lat,lon,int(speed))
+    data = generate_data(lat,lon,int(speed),a = float(normal(loc=90,scale=10,size=1)))
     ID = random.randint(1,sys.maxsize)
     send_data(ID,data)
     sleep(0.1)
