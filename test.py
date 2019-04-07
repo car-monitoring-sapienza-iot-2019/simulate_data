@@ -23,7 +23,7 @@ def generate_data(lat,lon,speed,engineTemperature):
       "rpm": 0.0,\
       "massAirFlow": 0.0,\
       "speed": '+str(speed)+',\
-      "engineTemperature": '+engineTemperature+'\
+      "engineTemperature": '+str(engineTemperature)+'\
   }'
 
   return data
